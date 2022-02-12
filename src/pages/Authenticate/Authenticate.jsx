@@ -9,7 +9,7 @@ import './Authenticate.css';
 // import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Snackbar from '@mui/material/Snackbar';
-import { setAuth } from '../../actions/auth-actions';
+import { setAuth,setUser } from '../../actions/auth-actions';
 import {SignUpDealer} from './SignUpDealer';
 import { Login } from './Login';
 import { isDealer } from '../../actions/user-actions';
@@ -17,7 +17,9 @@ const Authenticate = () => {
     const [Role, setRole] = useState(0);
     const [value, setValue] = React.useState(0);
     const [tabs, setTabs] = useState(true);
-
+    console.log("Role",Role);
+    console.log("Value",value);
+    console.log("Tabs",tabs);
     // console.log(data["Delhi"]);
     const handleChange = (event, newValue) => {
         console.log(newValue);
@@ -37,9 +39,9 @@ const Authenticate = () => {
             <Tab value={1} label="Driver" />
         </Tabs>}
         <Card className="AuthBox" sx={{maxWidth:320,backgroundColor:CONTRAST_TEXT}}>
-            {value===0 && Role===0 && <Login tabs={tabs,setTabs} role={Role} setRole={setRole}/>}
+            {value===0 && Role===0 && <Login tabs={tabs} value={value} setTabs={setTabs} role={Role} setRole={setRole}/>}
             {value===0 && Role===1 && <SignUpDealer setRole={setRole}/>}
-            {value===1 && Role===0 && <Login tabs={tabs,setTabs} role={Role} setRole={setRole}/>}
+            {value===1 && Role===0 && <Login tabs={tabs} setTabs={setTabs} value={value} role={Role} setRole={setRole}/>}
             {value===1 && Role===1 && <SignUpDriverr setRole={setRole}/>}
         </Card>
     </Box>

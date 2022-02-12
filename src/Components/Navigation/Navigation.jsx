@@ -16,31 +16,40 @@ import LoginIcon from '@mui/icons-material/Login';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import './Navigation.css'
 import {PRIMARY,PRIMARY_TEXT,ACCENT, CONTRAST_TEXT} from '../../Colors/index';
+import ResponsiveDrawer from '../Drawer/Drawer';
+import { setAuth, setUser } from '../../actions/auth-actions';
+import { useDispatch } from 'react-redux';
 
-const pages = ['About US'];
-const settings = ['Account', 'Dashboard', 'Logout'];
 
 const Navigation = () => {
-    let User=useSelector((state)=> state.Auth.user);
-    let isAuth=useSelector((state)=> state.Auth.Auth);
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  let User=useSelector((state)=> state.Auth.user);
+  let isAuth=useSelector((state)=> state.Auth.Auth);
+  const dispatch=useDispatch();
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  
+  const logout=()=>{
+    dispatch(setUser({}));
+    dispatch(setAuth(false));
+  }
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
+  
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
+  
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  
+  const pages = ['About US'];
+  const settings = [{name:'Dashboard',action:null}, {name:'Logout',action:logout}];
+  
   return (
     <AppBar position="fixed" sx={{backgroundColor:PRIMARY,color:CONTRAST_TEXT}}>
       <Container maxWidth="xl">
@@ -62,7 +71,7 @@ const Navigation = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-            >
+              >
               <MenuIcon />
             </IconButton>
             <Menu
@@ -133,8 +142,8 @@ const Navigation = () => {
                 onClose={handleCloseUserMenu}
             >
                 {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting.name} onClick={setting.action}>
+                    <Typography textAlign="center">{setting.name}</Typography>
                 </MenuItem>
                 ))}
             </Menu>
