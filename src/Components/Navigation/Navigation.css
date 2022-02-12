@@ -1,0 +1,10 @@
+.ActionBox{
+    display:flex;
+    flex-wrap: wrap;
+    width:100%;
+    /* min-height: fit-content; */
+    max-height:100%;
+    padding-top: 5em;
+    padding-bottom: 2em;
+    overflow-y: scroll;
+}

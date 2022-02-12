@@ -1,6 +1,3 @@
-// import { addTodo,remove,deleteTodo } from "../actions";
-import { setAuth } from "../actions/auth-actions";
-
 var data = {
     Auth:false,
     user:{}

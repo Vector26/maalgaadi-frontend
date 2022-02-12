@@ -3,6 +3,11 @@ import './App.css';
 import { useDispatch,useSelector } from 'react-redux';
 import { setAuth } from './actions/auth-actions';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import Dashboard from './pages/Dashboard/Dashboard';
+import Home from './pages/Home/Home';
+import Navigation, { ActionBox } from './Components/Navigation/Navigation';
+import Authenticate from './pages/Authenticate/Authenticate';
+import { LIGHT_PRIMARY, PRIMARY } from './Colors';
 const HOME_ROUTE="/"
 const AUTH_ROUTE="/authenticate"
 const DASHBOARD="/dashboard"
@@ -11,17 +16,20 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <Navigation/>
+      <ActionBox sx={{backgroundColor:LIGHT_PRIMARY}}>
         <Switch>
           <GuestRoute path={HOME_ROUTE} exact>
-            <h1>Guest route</h1>
+            <Home/>
           </GuestRoute>
           <GuestRoute path={AUTH_ROUTE} exact>
-            <h1>Auth route</h1>
+            <Authenticate/>
           </GuestRoute>
           <ProtectedRoute path={DASHBOARD} exact>
-            <h1>Private route</h1>
+            <Dashboard/>
           </ProtectedRoute>
         </Switch>
+      </ActionBox>
         </BrowserRouter>
     </div>
   );

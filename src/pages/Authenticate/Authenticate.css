@@ -1,0 +1,46 @@
+.WorkBox{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.AuthBox > div{
+    margin:0.75em 0;
+}
+.selector{
+    margin:0;
+    padding:0;
+    
+}
+
+.selector > *{
+    width:82% !important;
+    margin-top:0.5em;
+}
+
+.AuthBox2{
+    max-height:22em;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.AuthBox2 > div{
+    margin-top: 1em;
+}
+
+#CA{
+    margin-top: 1em;
+}
+
+.Container{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    background-color: red;
+}
