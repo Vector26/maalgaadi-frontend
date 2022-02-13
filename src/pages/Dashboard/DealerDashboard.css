@@ -1,3 +1,15 @@
 .market > *{
-    margin:0.5em;
+    margin:0.5em 1em;
+}
+
+.market{
+    overflow-x: hidden;
+}
+
+.filtersContainer{
+    border-radius: 0.3em;
+}
+
+.filterFields > div{
+    margin: 0.75em 0;
 }

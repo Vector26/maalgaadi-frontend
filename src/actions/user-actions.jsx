@@ -6,3 +6,11 @@ export const isDealer=(type)=>{
         }
     )
 }
+export const setFeed=(data)=>{
+    return (
+        {
+            type:"SET_FEED",
+            feed:data
+        }
+    )
+}

@@ -21,7 +21,7 @@ const getHeaders=()=>{
     const accessToken=getAuthToken();
     return accessToken!=null?{
         headers:{
-            ACCESS_TOKEN:getAuthToken(),
+            'Authorization': "Bearer "+getAuthToken(),
             'Content-type':'application/json',
             'Accept':'application/json'
         }
@@ -71,6 +71,7 @@ export const GetOTP=async (username)=>{return await api.get(encodeURI(`/api/v1/a
 // DealerAPI
 
 export const GetDrivers=async (data)=>{return await api.post('/api/v1/dealer/drivers',data,getHeaders())}
+export const GetDriversByState=async (data)=>{return await api.post('/api/v1/dealer/drivers-state',data,getHeaders())}
 export const GetDriversByRoute=async (data)=>{return await api.post('/api/v1/dealer/drivers-route',data,getHeaders())}
 export const BookDriver=async (data)=>{return await api.post('/api/v1/dealer/book',data,getHeaders())}
 

@@ -4,21 +4,22 @@ import React from 'react'
 import { ActionBox } from '../../Components/Navigation/Navigation'
 import './Home.css'
 import bg from '../../media/bg.jpg'
-import { PRIMARY, PRIMARY_TEXT } from '../../Colors'
+
+import { CONTRAST_TEXT, DARK_PRIMARY, LIGHT_PRIMARY, PRIMARY, PRIMARY_TEXT } from '../../Colors'
 
 const Home = () => {
   // console.log(bg);
   return (
     <>
-    <ActionBox>
-    <Box className="jumbotron" sx={{}}>
-        <Box className="title" sx={{backgroundImage:`url(${bg})`,padding:'1em',flex:'1'}}>
-        <Typography variant="h2" sx={{fontWeight:'bold',fontSize:'5em',color:'white',margin:'1em',color:PRIMARY_TEXT}}>
-          Transport your <br/> Goods
-        </Typography>
+      <Box className="jumbotron" sx={{color:DARK_PRIMARY}}>
+        <Box className="title" sx={{flex:2.5,alignItems:'flex-start'}}>
+        <Typography variant="h2">Looking for Delivery Truck?</Typography>
+        <Typography variant="h3">We got you covered</Typography>
+        </Box>
+        <Box sx={{flex:2}}>
+        <Typography variant="h1">Looking for Delivery Truck?</Typography>
         </Box>
       </Box>
-    </ActionBox>
     </>
   )
 }

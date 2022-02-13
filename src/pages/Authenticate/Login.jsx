@@ -1,6 +1,6 @@
 import { Button, Card, CardActions, CardContent, Container, IconButton, MenuItem, Select, Tab, Tabs, TextField, Typography } from '@mui/material';
 import React, { useRef, useState } from 'react'
-import { LoginDriver,LoginDealer, SignupDealer, GetOTP, LoginDealerOTP } from '../../Requests';
+import { LoginDriver,LoginDealer, SignupDealer, GetOTP, LoginDealerOTP, LoginDriverOTP } from '../../Requests';
 import './Authenticate.css';
 import CloseIcon from '@mui/icons-material/Close';
 import Snackbar from '@mui/material/Snackbar';
@@ -16,9 +16,7 @@ export const Login=({tabs,setTabs,role,value,setRole})=>{
     const [Password, setPassword] = useState("");
     const [isError, setisError] = useState(false);
     const [OTP, setOTP] = useState(0);
-    // console.log("Tabs",tabs);
     var ErrorMessage=useRef();
-    // console.log(tabs);
     const handleUsernameChange=(e)=>{
         setUsername(e.target.value);
     }
@@ -40,66 +38,30 @@ export const Login=({tabs,setTabs,role,value,setRole})=>{
         })
     }
 
-    const login=()=>{
-        console.log("Tabs",tabs)
-        if(value==1){
-            console.log("Driver login");
+    const login=async ()=>{
+        let is_dealer=(value===0);
+        let res={};
+        try
+        {
+            if(!is_dealer){
             if(tabs)
-            {   console.log("Driver password login");
-                LoginDriver({
-                    "username": Username,
-                    "password": Password
-                })
-                .then((res)=>{
-                    // 
-                    console.log(res);
-                    console.log(res.data[DRIVER]);
-                    PostAuthenticate(false,res);
-                })
-                .catch((e)=>{
-                    console.error(e);
-                })
+                res= await LoginDriver({"username": Username,"password": Password});
+            else
+                res=await LoginDriverOTP({"username": Username, "otp": parseInt(OTP)});
             }
             else{
-                console.log("Driver OTP login");
-                LoginDealerOTP({
-                    "username": Username,
-                    "otp": parseInt(OTP)
-                }).then((res)=>{
-                    console.log(res);
-                    PostAuthenticate(false,res);
-                });
+                if(tabs)
+                    res = await LoginDealer({"username": Username,"password": Password})
+                else
+                    res = await LoginDealerOTP({"username": Username,"otp": parseInt(OTP)})
             }
         }
-        else{
-            console.log("Dealer login");
-            if(tabs)
-            {   
-                console.log("Dealer login");
-                LoginDealer({
-                    "username": Username,
-                    "password": Password
-                })
-                .then((res)=>{
-                    // 
-                    PostAuthenticate(true,res);
-                })
-                .catch((e)=>{
-                    console.error(e);
-                })
-            }
-            else{
-                console.log("Dealer OTP login");
-                LoginDealerOTP({
-                    "username": Username,
-                    "otp": parseInt(OTP)
-                }).then((res)=>{
-                    console.log(res);
-                    PostAuthenticate(true,res);
-                });
-            }
-            // 
+        catch(e){
+            ErrorMessage.current="Invalid Login";
+            setisError(true);
+            console.error(e);
         }
+        PostAuthenticate(is_dealer,res);
     }
 
     const action=(<IconButton
@@ -127,12 +89,9 @@ export const Login=({tabs,setTabs,role,value,setRole})=>{
             dispatch(setUser(res.data[DEALER]));
         }
         else{
-            console.log(res);
-            console.log("Driver->",res.data[DRIVER]);
             dispatch(setUser(res.data[DRIVER]));
         }
         dispatch(setAuth(true));
-        return null
     }
 
     const OTPComponent=(
@@ -158,14 +117,14 @@ export const Login=({tabs,setTabs,role,value,setRole})=>{
             </>
         );
 
-    return (tabs ? (<>
+    const PasswordComponent=(<>
         <CardContent>
             <Typography variant="h4" color="text.secondary">
             LOGIN
             </Typography>
             <Container className="AuthBox2">
                 <TextField onChange={handleUsernameChange} placeholder="Username" />
-                <TextField type="password" onChange={handlePasswordChange} placeholder="Passwor" />
+                <TextField type="password" onChange={handlePasswordChange} placeholder="Password" />
             </Container>
             <Button id="CA" onClick={login}>Login</Button>
         </CardContent>
@@ -176,7 +135,7 @@ export const Login=({tabs,setTabs,role,value,setRole})=>{
             <Button onClick={()=>setTabs(false)}>Login With OTP?</Button>
         </CardActions>
         {snacc}
-    </>):OTPComponent
-    
-    );
+    </>);
+
+    return (tabs ? PasswordComponent:OTPComponent);
 }

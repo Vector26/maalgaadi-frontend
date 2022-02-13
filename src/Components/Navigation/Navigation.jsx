@@ -16,17 +16,20 @@ import LoginIcon from '@mui/icons-material/Login';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import './Navigation.css'
 import {PRIMARY,PRIMARY_TEXT,ACCENT, CONTRAST_TEXT} from '../../Colors/index';
-import ResponsiveDrawer from '../Drawer/Drawer';
 import { setAuth, setUser } from '../../actions/auth-actions';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import avatar from '../../media/avatar.png'
 
 
 const Navigation = () => {
   let User=useSelector((state)=> state.Auth.user);
   let isAuth=useSelector((state)=> state.Auth.Auth);
   const dispatch=useDispatch();
+  const history=useHistory();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
   
   const logout=()=>{
     dispatch(setUser({}));
@@ -46,6 +49,10 @@ const Navigation = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const getAuth=()=>{
+    history.push('/authenticate');
+  }
   
   const pages = ['About US'];
   const settings = [{name:'Dashboard',action:null}, {name:'Logout',action:logout}];
@@ -122,7 +129,7 @@ const Navigation = () => {
             (<Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={avatar} />
                 </IconButton>
             </Tooltip>
             <Menu
@@ -149,7 +156,7 @@ const Navigation = () => {
             </Menu>
             </Box>) : (
             <Box>
-              <IconButton variant="outlined" sx={{color:CONTRAST_TEXT}}><LoginIcon/></IconButton>
+              <IconButton onClick={getAuth} variant="outlined" sx={{color:CONTRAST_TEXT}}><LoginIcon/></IconButton>
             </Box>
             )}
         </Toolbar>

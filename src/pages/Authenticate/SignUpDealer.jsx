@@ -8,9 +8,13 @@ import './Authenticate.css';
 // import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Snackbar from '@mui/material/Snackbar';
-import { setAuth } from '../../actions/auth-actions';
+import { setAuth, setUser } from '../../actions/auth-actions';
+import { isDealer } from '../../actions/user-actions';
+const DRIVER="driver";
+const DEALER="dealer";
 
 export const SignUpDealer=({setRole})=>{
+    let dispatch=useDispatch();
     const form=useRef();
     const [Username, setUsername] = useState("");
     const [Name, setName] = useState("");
@@ -55,12 +59,23 @@ export const SignUpDealer=({setRole})=>{
         console.log(e);
 
     }
-     const action=(<IconButton
+    
+    const PostAuthenticate=(isDEALER,res)=>{
+        dispatch(isDealer(isDEALER));
+        if(isDEALER){
+            dispatch(setUser(res.data[DEALER]));
+        }
+        else{
+            dispatch(setUser(res.data[DRIVER]));
+        }
+        dispatch(setAuth(true));
+    }
+    const action=(<IconButton
         size="small"
         aria-label="close"
         color="inherit"
         onClick={()=>setCPW(false)}
-      >
+        >
         <CloseIcon fontSize="small" />
       </IconButton>)
 
@@ -128,13 +143,6 @@ export const SignUpDealer=({setRole})=>{
         action={action}
         />
     </>);
-}
-
-const PostAuthenticate=(isDealer,res)=>{
-    // let history=useHistory();
-    let dispatch=useDispatch();
-    dispatch(setAuth(true));
-    dispatch(isDealer(isDealer));
 }
 
 export default SignUpDealer;
