@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {CSkeleton} from '../../Components/CSkeleton';
 import {setFeed} from '../../actions/user-actions';
 import { BD } from '../../Components/BookingDialoge/BD';
+import {ACCENT, DARK_PRIMARY, LIGHT_PRIMARY} from '../../Colors/index';
 
 const DealerDashboard = () => {
   const TIMEOUT=1000;
@@ -49,14 +50,13 @@ const DealerDashboard = () => {
       "sortBy": "name",
       "descending": false
     });
-    setTimeout(()=>setLoading(false), TIMEOUT);
     setfeed(res.data[DRIVER_LIST])
     // console.log(Feed);
   }
   const loadFeedbyState = async(e)=>{
+    setLoading(true);
     if(e.target.checked)
     {
-      setLoading(true);
       let res=await GetDriversByState({
         "state": State,
         "pageNumber": 0,

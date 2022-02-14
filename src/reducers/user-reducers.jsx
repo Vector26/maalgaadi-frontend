@@ -11,7 +11,9 @@ var data = {
             localStorage.setItem(IS_DEALER,action.isDealer);
             return {...state,isDealer:action.isDealer}
           case "SET_FEED":
-            return {...state,Feed:action.feed}
+            return {...state,Feed:action.feed,Bookings:[]}
+          case "SET_BOOKINGS":
+            return {...state,Feed:[],Bookings:action.bookings}
           default: return state;
       }
   };

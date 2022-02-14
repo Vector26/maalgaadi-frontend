@@ -66,7 +66,10 @@ export const LoginDealerOTP=async (data)=>{
     setAuthToken(res.data.accessToken);
     return res;
 }
-export const GetOTP=async (username)=>{return await api.get(encodeURI(`/api/v1/auth/get-otp?username=${username}`))}
+export const GetOTP=async (username)=>{
+    const queryParams = { username: username}
+    const queryString = new URLSearchParams(queryParams).toString();
+    return await api.get((`/api/v1/auth/get-otp?${queryString}`))}
 
 // DealerAPI
 

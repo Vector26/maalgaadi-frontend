@@ -14,3 +14,11 @@ export const setFeed=(data)=>{
         }
     )
 }
+export const setBookings=(data)=>{
+    return (
+        {
+            type:"SET_BOOKINGS",
+            bookings:data
+        }
+    )
+}

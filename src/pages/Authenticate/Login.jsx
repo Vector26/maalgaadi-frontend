@@ -37,7 +37,10 @@ export const Login=({tabs,setTabs,role,value,setRole})=>{
             setisError(true);
         })
     }
-
+    const invalidLogin=()=>{
+        ErrorMessage.current="Invalid Login";
+        setisError(true);
+    }
     const login=async ()=>{
         let is_dealer=(value===0);
         let res={};
@@ -57,8 +60,7 @@ export const Login=({tabs,setTabs,role,value,setRole})=>{
             }
         }
         catch(e){
-            ErrorMessage.current="Invalid Login";
-            setisError(true);
+            invalidLogin();
             console.error(e);
         }
         PostAuthenticate(is_dealer,res);
@@ -86,10 +88,20 @@ export const Login=({tabs,setTabs,role,value,setRole})=>{
     const PostAuthenticate=(isDEALER,res)=>{
         dispatch(isDealer(isDEALER));
         if(isDEALER){
-            dispatch(setUser(res.data[DEALER]));
+            if(res.data[DEALER]!=null)
+                dispatch(setUser(res.data[DEALER]));
+            else{
+                invalidLogin();
+                return
+            }
         }
         else{
-            dispatch(setUser(res.data[DRIVER]));
+            if(res.data[DRIVER]!=null)
+                dispatch(setUser(res.data[DRIVER]));
+            else{
+                invalidLogin();
+                return
+            }
         }
         dispatch(setAuth(true));
     }
