@@ -14,6 +14,17 @@ React, Redux, Axios, Material-UI
 - JWT Token Authorization.
 - Login via OTP.
 
+# ScreenShots
+
+![image](https://user-images.githubusercontent.com/23053807/153870217-adeac10b-f560-4c02-8182-ee6addbde442.png)
+![image](https://user-images.githubusercontent.com/23053807/153870291-70b28de8-cf6c-4dde-a81c-3e1c098a81a0.png)
+![image](https://user-images.githubusercontent.com/23053807/153870322-fe853120-2787-4db3-8835-667aaecd636c.png)
+![ezgif-2-1ba95ddda1](https://user-images.githubusercontent.com/23053807/153870803-06dc7329-3a9e-4eba-94bb-c1db7ed4e64b.gif)
+![image](https://user-images.githubusercontent.com/23053807/153870886-a897857c-dc0d-4fd0-9906-80043e00f493.png)
+
+
+
+
 ## How to run
 
 ### `yarn start`
