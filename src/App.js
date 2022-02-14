@@ -16,20 +16,24 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <Navigation/>
-      <ActionBox sx={{backgroundColor:LIGHT_PRIMARY}}>
         <Switch>
           <GuestRoute path={HOME_ROUTE} exact>
+          <Navigation color="white" bg={"Transparent"}/>
             <Home/>
           </GuestRoute>
           <GuestRoute path={AUTH_ROUTE} exact>
+          <Navigation color="white" bg={PRIMARY}/>
+          <ActionBox sx={{backgroundColor:LIGHT_PRIMARY}}>
             <Authenticate/>
+          </ActionBox>
           </GuestRoute>
-          <ProtectedRoute path={DASHBOARD} exact>
-            <Dashboard/>
-          </ProtectedRoute>
+            <ProtectedRoute path={DASHBOARD} exact>
+            <Navigation color="white" bg={PRIMARY}/>
+            <ActionBox sx={{backgroundColor:LIGHT_PRIMARY}}>
+              <Dashboard/>
+            </ActionBox>
+            </ProtectedRoute>
         </Switch>
-      </ActionBox>
         </BrowserRouter>
     </div>
   );

@@ -1,23 +1,27 @@
-import { Typography } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 import { ActionBox } from '../../Components/Navigation/Navigation'
 import './Home.css'
-import bg from '../../media/bg.jpg'
+import bg from '../../media/bg2.png'
+import truck from '../../media/truck.png'
 
-import { CONTRAST_TEXT, DARK_PRIMARY, LIGHT_PRIMARY, PRIMARY, PRIMARY_TEXT } from '../../Colors'
+import { ACCENT, CONTRAST_TEXT, DARK_PRIMARY, LIGHT_PRIMARY, PRIMARY, PRIMARY_TEXT } from '../../Colors'
 
 const Home = () => {
   // console.log(bg);
   return (
     <>
-      <Box className="jumbotron" sx={{color:DARK_PRIMARY}}>
-        <Box className="title" sx={{flex:2.5,alignItems:'flex-start'}}>
-        <Typography variant="h2">Looking for Delivery Truck?</Typography>
-        <Typography variant="h3">We got you covered</Typography>
+      <Box className="jumbotron" sx={{color:DARK_PRIMARY,backgroundImage:`url(${bg})`,backgroundSize:'cover'}}>
+        <Box className="title" sx={{flex:1.5,alignItems:'center',justifyContent:'center'}}>
+        <Typography variant="h2" sx={{color:CONTRAST_TEXT,backgroundColor:PRIMARY,padding:'0.75em',borderRadius:'1em 2em 3em 7em'}}>Find the perfect transport for your <span style={{fontFamily:'Impact !important'}}>goods</span>
+        <br/>
+        <br/>
+        <Button variant="contained" sx={{backgroundColor:ACCENT,padding:'1em'}}>Get Started</Button>
+        </Typography>
         </Box>
-        <Box sx={{flex:2}}>
-        <Typography variant="h1">Looking for Delivery Truck?</Typography>
+        <Box sx={{flex:2,alignItems:'center',paddingTop:'2em',display:{xs:'none',md:'none',lg:'flex'}}}> 
+          <img src={truck}/>
         </Box>
       </Box>
     </>
@@ -25,14 +29,3 @@ const Home = () => {
 }
 
 export default Home
-
-      {/* <Box className="jumbotron" sx={{}}>
-        <Box className="title" sx={{backgroundColor:'rgba(200,200,200,0.3)',padding:'1em',flex:'1'}}>
-        <Typography variant="h2" sx={{fontWeight:'bold',fontSize:'5em',color:'white',margin:'1em',color:'black'}}>
-          Transport your <br/> Goods
-        </Typography>
-        </Box>
-        <Box className="title" sx={{backgroundColor:'rgba(200,200,200,0.3)',padding:'1em',flex:'1'}}>
-          <Box sx={{width:'90%',backgroundImage:`url(${bg})`,borderRadius:'2em',backgroundPosition:'bottom',backgroundSize:'contain',backgroundRepeat:'no-repeat'}}/>
-        </Box>
-      </Box> */}

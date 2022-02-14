@@ -154,26 +154,26 @@ const DriverCard=({driver,index})=>{
       onClose={()=>setDialogueOn2(false)}
       open={DialogueOn2}
       />
-      <Card sx={{ minWidth: 275,maxHeight:200 ,padding:'0.5em'}}>
+      <Card component={Paper} sx={{ minWidth: 275,maxHeight:200 ,padding:'0.5em'}}>
         <CardContent sx={{textAlign:'left'}}>
-        <Typography color="text.secondary">
-            Name:{driver.user.name}
+        <Typography color="text.secondary" variant="h6" sx={{fontWeight:'bold'}}>
+            {driver.user.name}
           </Typography>
-          <Typography color="text.secondary">
-            Age:{driver.age}
+          <Typography variant="body2">
+            {driver.age} years old
           </Typography>
-          <Typography color="text.secondary">
+          <Typography variant="body2">
             Truck Capacity:{driver.truckCapacity}
           </Typography>
-          <Typography variant="body2">
+          <Typography color="text.secondary" variant="body2">
             Transporter Name:{driver.transporterName}
           </Typography>
-          <Typography variant="body2">
+          <Typography color="text.secondary" variant="body2">
             Experince:{` ${parseInt(driver.drivingExperience)} ${parseInt(driver.drivingExperience)>1?'years':'year'}`}
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={()=>{setDialogueOn2(true)}}>Book Now</Button>
+          <Button size="small" sx={{backgroundColor:ACCENT}} variant="contained" onClick={()=>{setDialogueOn2(true)}}>Book Now</Button>
         </CardActions>
       </Card>
     </>

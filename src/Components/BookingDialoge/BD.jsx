@@ -5,6 +5,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { BookDriver } from '../../Requests';
 import CloseIcon from '@mui/icons-material/Close';
 import Snackbar from '@mui/material/Snackbar';
+import { ACCENT } from '../../Colors';
 
 export const BD = ({index,onClose,open}) => {
     let driver=useSelector(state=>state.User.Feed[index]);
@@ -87,7 +88,7 @@ export const BD = ({index,onClose,open}) => {
               {driver.interestedRoutes.map((Route,key)=>{
                   return (
                       <>
-                        <Button onClick={()=>BookRide(Route.fromCity,Route.toCity)} variant="contained" sx={{width:'100%'}} key={key}>{`${Route.fromCity}`}<ChevronRightIcon/>{`${Route.toCity}`}</Button>
+                        <Button onClick={()=>BookRide(Route.fromCity,Route.toCity)} variant="contained" sx={{width:'100%',backgroundColor:ACCENT}} key={key}>{`${Route.fromCity}`}<ChevronRightIcon/>{`${Route.toCity}`}</Button>
                         <br/>
                       </>
                   );

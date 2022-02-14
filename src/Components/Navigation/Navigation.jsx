@@ -22,7 +22,7 @@ import { useHistory } from 'react-router-dom';
 import avatar from '../../media/avatar.png'
 
 
-const Navigation = () => {
+const Navigation = ({bg,color}) => {
   let User=useSelector((state)=> state.Auth.user);
   let isAuth=useSelector((state)=> state.Auth.Auth);
   const dispatch=useDispatch();
@@ -58,7 +58,7 @@ const Navigation = () => {
   const settings = [{name:'Dashboard',action:null}, {name:'Logout',action:logout}];
   
   return (
-    <AppBar position="fixed" sx={{backgroundColor:PRIMARY,color:CONTRAST_TEXT}}>
+    <AppBar position="fixed" sx={{minHeight:'3em',maxHeight:'4.5em',backgroundColor:bg,color:color}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -119,7 +119,7 @@ const Navigation = () => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: CONTRAST_TEXT, display: 'block' }}
+                sx={{ my: 2, color: color, display: 'block' }}
               >
                 {page}
               </Button>
