@@ -11,12 +11,12 @@ const Home = () => {
   // console.log(bg);
   return (
     <>
-      <Box className="jumbotron" sx={{color:DARK_PRIMARY,backgroundImage:`url(${bg})`,backgroundSize:'cover'}}>
+      <Box className="jumbotron" sx={{color:DARK_PRIMARY,backgroundImage:`url(${bg})`,backgroundSize:'100% 100%'}}>
         <Box className="title" sx={{flex:1.5,alignItems:'center',justifyContent:'center'}}>
-        <Typography variant="h2" sx={{color:CONTRAST_TEXT,backgroundColor:PRIMARY,padding:'0.75em',borderRadius:'1em 2em 3em 7em'}}>Find the perfect transport for your <span style={{fontFamily:'Impact !important'}}>goods</span>
+        <Typography variant="h2" sx={{color:CONTRAST_TEXT,backgroundColor:PRIMARY,padding:'1em',marginTop:'1em',borderRadius:'1em 5em 5em 1em'}}>Find the perfect transport for your <span style={{fontFamily:'Impact !important'}}>goods</span>
         <br/>
         <br/>
-        <Button variant="contained" sx={{backgroundColor:ACCENT,padding:'1em'}}>Get Started</Button>
+        <Button onClick={()=>{window.location='/authenticate'}} variant="contained" sx={{backgroundColor:ACCENT,padding:'1em'}}>Get Started</Button>
         </Typography>
         </Box>
         <Box sx={{flex:2,alignItems:'center',paddingTop:'2em',display:{xs:'none',md:'none',lg:'flex'}}}> 

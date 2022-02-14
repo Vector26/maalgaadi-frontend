@@ -28,6 +28,7 @@ const DriverDashboard = () => {
   const setbookings=(data)=>{
     setTimeout(()=>setLoading(false), TIMEOUT);
     dispatch(setBookings(data))
+    // console.log(bookings.length)
   }
 
   const preLoad=(
@@ -48,12 +49,12 @@ const DriverDashboard = () => {
     <>
     <Container className="market" component={Paper} sx={{flex:4,height:'100%',flexWrap:'wrap',overflowY:'scroll',padding:'1em'}}>
     <Typography color="black" variant="h4">Bookings For You 😁</Typography>
-    <Container className="market" component={Paper} sx={{display:'flex',justifyContent:'flex-start',flex:4,height:'100%',flexWrap:'wrap',overflowY:'scroll',padding:'1em'}}>
+    <Container className="market" component={Paper} sx={{display:'flex',justifyContent:'center',flex:4,height:'100%',flexWrap:'wrap',overflowY:'scroll',padding:'1em'}}>
       {
-        Loading?preLoad:(
+        Loading?preLoad:(bookings.length>0?
           bookings.map((booking,key)=>{
             return <Booking booking={booking} key={key}/>
-          })
+          }):<Typography variant="h2">No Current Bookings <br/>Available 👋</Typography>
           )
         }
       </Container>

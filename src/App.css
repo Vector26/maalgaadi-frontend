@@ -6,9 +6,6 @@ html body{
   font-family: 'Ubuntu', sans-serif !important;
 }
 
-.cbutton{
-  background-color: #FD8061;
-}
 
 .App {
   display: flex;

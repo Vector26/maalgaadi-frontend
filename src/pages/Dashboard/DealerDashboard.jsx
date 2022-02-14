@@ -1,5 +1,5 @@
-import { Button, Card, CardActions, CardContent, Checkbox, Container, Dialog, IconButton, Skeleton, TextField, Typography } from '@mui/material'
-import React,{useEffect, useState} from 'react'
+import { Button, Card, CardActions, CardContent, Checkbox, Container, Dialog, IconButton, MenuItem, Select, Skeleton, TextField, Typography } from '@mui/material'
+import React,{useEffect, useRef, useState} from 'react'
 import Paper from '@mui/material/Paper';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Box } from '@mui/system';
@@ -10,6 +10,7 @@ import {CSkeleton} from '../../Components/CSkeleton';
 import {setFeed} from '../../actions/user-actions';
 import { BD } from '../../Components/BookingDialoge/BD';
 import {ACCENT, DARK_PRIMARY, LIGHT_PRIMARY} from '../../Colors/index';
+import data from '../../data/CS.json';
 
 const DealerDashboard = () => {
   const TIMEOUT=1000;
@@ -18,9 +19,12 @@ const DealerDashboard = () => {
   let Feed=useSelector((state)=>state.User.Feed);
   const dispatch=useDispatch();
   const [Loading, setLoading] = useState(true);
-  const [ToCity, setToCity] = useState("");
-  const [FromCity, setFromCity] = useState("");
+  const [FromCity, setFromCity] = useState(data["Choose State"]);
+  const [FromState, setFromState] = useState("Choose State");
+  const [ToCity, setToCity] = useState(data["Choose State"]);
+  const [ToState, setToState] = useState("Choose State");
   const [DialogueOn, setDialogueOn] = useState(false);
+  // console.log(data[ToState]);
   
   const setfeed=(data)=>{
     setTimeout(()=>setLoading(false), TIMEOUT);
@@ -36,7 +40,7 @@ const DealerDashboard = () => {
         "sortBy": "name",
         "descending": false
     });
-    console.log(res);
+    // console.log(res);
     setTimeout(()=>setLoading(false), TIMEOUT);
     setfeed(res.data[DRIVER_LIST])
   }
@@ -88,23 +92,68 @@ const DealerDashboard = () => {
   </>
   );
 
+  // console.log(cities);
   const filters=(<>
         <Box sx={{display:'flex',flexDirection:'column',padding:'1em'}}>
         <Typography variant="h4">Filters</Typography>
         <Box className="filterFields">
           <Typography variant="caption">Show all from my State</Typography>
           <Checkbox
+          id="ST"
           onChange={loadFeedbyState}
           />
           <br/>
-          <TextField
+          <Select
+                fullWidth
+                value={FromState}
+                label="State"
+                onChange={(e)=>setFromState(e.target.value)}>
+                    {Object.keys(data).map((State,k)=>{
+                        return <MenuItem key={k} value={State}>{State}</MenuItem>
+                    })}
+            </Select>
+            <Select
+                fullWidth
+                value={FromCity}
+                label="City"
+                placeholder='City'
+                defaultValue="Select City"
+                onChange={(e)=>setFromCity(e.target.value)}>
+                    {data[FromState].map((city,k)=>{
+                        return <MenuItem key={k} sx={{color:'black'}} value={city}>{city}</MenuItem>
+                    })}
+            </Select>
+            <br/>
+            <Typography sx={{paddingLeft:'1.5em'}} variant="subtitle">To</Typography>
+            <br/>
+            <Select
+                fullWidth
+                value={ToState}
+                label="State"
+                onChange={(e)=>setToState(e.target.value)}>
+                    {Object.keys(data).map((State,k)=>{
+                        return <MenuItem key={k} value={State}>{State}</MenuItem>
+                    })}
+            </Select>
+            <Select
+                fullWidth
+                value={ToCity}
+                label="City"
+                placeholder='City'
+                defaultValue={ToState[0]}
+                onChange={(e)=>setToCity(e.target.value)}>
+                    {data[ToState].map((city,k)=>{
+                        return <MenuItem key={k} sx={{color:'black'}} value={city}>{city}</MenuItem>
+                    })}
+            </Select>
+          {/* <TextField
           onChange={(e)=>setFromCity(e.target.value)}
           placeholder='From City'
           />
           <TextField
           onChange={(e)=>setToCity(e.target.value)}
           placeholder='To City'
-          />
+          /> */}
           <Button onClick={loadByRoute}>Filter</Button>
         </Box>
         </Box>
@@ -132,10 +181,10 @@ const DealerDashboard = () => {
     </Container>
       <Container className="market" component={Paper} sx={{display:'flex',justifyContent:'space-evenly',flex:4,height:'100%',flexWrap:'wrap',overflowY:'scroll',padding:'1em'}}>
       {
-        Loading?preLoad:(
+        Loading?preLoad:(Feed.length>0?
             Feed.map((driver,key)=>{
               return <DriverCard key={key} index={key} driver={driver}/>
-            })
+            }):<Typography variant="h2">No drivers Available</Typography>
           )
       }
       </Container>
