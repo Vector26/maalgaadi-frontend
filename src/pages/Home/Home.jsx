@@ -1,7 +1,6 @@
 import { Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
-import { ActionBox } from '../../Components/Navigation/Navigation'
 import './Home.css'
 import bg from '../../media/bg2.png'
 import truck from '../../media/truck.png'

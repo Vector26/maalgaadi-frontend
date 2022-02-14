@@ -8,7 +8,9 @@ import Home from './pages/Home/Home';
 import Navigation, { ActionBox } from './Components/Navigation/Navigation';
 import Authenticate from './pages/Authenticate/Authenticate';
 import { LIGHT_PRIMARY, PRIMARY } from './Colors';
+import AboutUs from './pages/AboutUs/AboutUs';
 const HOME_ROUTE="/"
+const ABOUT_ROUTE="/about"
 const AUTH_ROUTE="/authenticate"
 const DASHBOARD="/dashboard"
 
@@ -20,6 +22,12 @@ function App() {
           <GuestRoute path={HOME_ROUTE} exact>
           <Navigation color="white" bg={"Transparent"}/>
             <Home/>
+          </GuestRoute>
+          <GuestRoute path={ABOUT_ROUTE} exact>
+            <Navigation color="white" bg={PRIMARY}/>
+            <ActionBox sx={{backgroundColor:LIGHT_PRIMARY}}>
+            <AboutUs/>
+            </ActionBox>
           </GuestRoute>
           <GuestRoute path={AUTH_ROUTE} exact>
           <Navigation color="white" bg={PRIMARY}/>

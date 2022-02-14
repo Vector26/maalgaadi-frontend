@@ -53,8 +53,12 @@ const Navigation = ({bg,color}) => {
   const getAuth=()=>{
     history.push('/authenticate');
   }
+
+  const gotoAbout=()=>{
+    history.push('/about')
+  }
   
-  const pages = ['About US'];
+  const pages = [{name:'About US',action:gotoAbout}];
   const settings = [{name:'Dashboard',action:null}, {name:'Logout',action:logout}];
   
   return (
@@ -100,8 +104,8 @@ const Navigation = ({bg,color}) => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.name} onClick={page.action}>
+                  <Typography textAlign="center">{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -117,11 +121,11 @@ const Navigation = ({bg,color}) => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={page.name}
+                onClick={page.action}
                 sx={{ my: 2, color: color, display: 'block' }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>
